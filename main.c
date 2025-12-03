@@ -6,11 +6,11 @@
 
 
 int** AllocateMemory(int rows, int cols) {
-    int** array = (int**)malloc(rows * sizeof(int*));
+    int** array = (int**)malloc((size_t)rows * sizeof(int*));
     if (array == NULL) return NULL;
     
     for (int i = 0; i < rows; i++) {
-        array[i] = (int*)malloc(cols * sizeof(int));
+        array[i] = (int*)malloc((size_t)cols * sizeof(int));
         if (array[i] == NULL) {
             for (int j = 0; j < i; j++) free(array[j]);
             free(array);
@@ -32,7 +32,7 @@ void FillArrayWithKeyboard(int** array, int rows, int cols) {
 }
 
 void FillArrayWithRandom(int** array, int rows, int cols) {
-    srand(time(NULL));
+    srand((unsigned int)time(NULL));
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             array[i][j] = rand() % 201 - 100;
